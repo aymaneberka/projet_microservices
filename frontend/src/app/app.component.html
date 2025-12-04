@@ -1,0 +1,33 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="dot"></div>
+      <div class="titles">
+        <span class="title">{{ title }}</span>
+        <span class="subtitle">Offres premium, livraison rapide</span>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Catalogue</a>
+      <a routerLink="/manage-products" routerLinkActive="active">Gestion produits</a>
+    </nav>
+    <div class="promo-card">
+      <div class="pill">
+        <span class="pill-dot"></span>
+        Deals exclusifs
+      </div>
+      <p>Jusqu’à -30% sur les best-sellers tech. Stock temps réel, paiement sécurisé.</p>
+    </div>
+  </aside>
+
+  <div class="content-area">
+    <header class="topbar">
+      <span class="topbar-title">Votre marketplace évolutive propulsée par nos microservices</span>
+      <span class="topbar-accent">Gateway 8080 · Paiement auto · Notifications email</span>
+    </header>
+
+    <main class="main">
+      <router-outlet />
+    </main>
+  </div>
+</div>

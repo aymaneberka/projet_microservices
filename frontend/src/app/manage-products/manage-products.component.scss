@@ -1,0 +1,65 @@
+.hero-box h1 {
+  margin: 8px 0 6px 0;
+}
+
+.manage-grid {
+  margin-top: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+textarea.input {
+  resize: vertical;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.ghost {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.danger {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 138, 138, 0.35);
+  background: rgba(255, 138, 138, 0.08);
+  color: #ffc5c5;
+  cursor: pointer;
+}
+
+.list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1.5fr 0.7fr 0.5fr 1fr;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  align-items: center;
+}
+
+.row.header {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.actions-row {
+  display: flex;
+  gap: 8px;
+}

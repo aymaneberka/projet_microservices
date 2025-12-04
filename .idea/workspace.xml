@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b62b557-3cce-4319-a866-b78ff28dfecc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/ma/ecommerce/orderservice/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/ma/ecommerce/orderservice/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,8 +189,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.PaymentServiceApplication" />
         <item itemvalue="Spring Boot.OrderServiceApplication" />
+        <item itemvalue="Spring Boot.PaymentServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -217,7 +213,7 @@
       <workItem from="1764534785163" duration="55000" />
       <workItem from="1764539722263" duration="316000" />
       <workItem from="1764540115041" duration="8173000" />
-      <workItem from="1764623083722" duration="33298000" />
+      <workItem from="1764623083722" duration="39912000" />
     </task>
     <servers />
   </component>

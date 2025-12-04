@@ -1,0 +1,124 @@
+<div class="container page">
+  <a routerLink="/" class="muted back-link">&#8592; Retour au catalogue</a>
+
+  <div *ngIf="loading" class="grid">
+    <div class="grid-skeleton"></div>
+    <div class="grid-skeleton"></div>
+  </div>
+
+  <div *ngIf="!loading && error" class="alert">{{ error }}</div>
+
+  <div *ngIf="!loading && !product && !error" class="muted">
+    Produit introuvable.
+  </div>
+
+  <div class="product-layout" *ngIf="product">
+    <section class="panel">
+      <div class="chip" style="margin-bottom:10px;">
+        Stock <strong>{{ product.stock }}</strong>
+      </div>
+      <h1 class="title">{{ product.name }}</h1>
+      <p class="muted">{{ product.description }}</p>
+      <div class="price">{{ product.price | number:'1.2-2' }} MAD</div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Commander ce produit</h2>
+      <p class="muted">Saisissez vos informations puis choisissez le moyen de paiement.</p>
+
+      <div *ngIf="orderResponse" class="success">
+        Commande envoyée · Ref {{ orderResponse.orderId }} · Paiement {{ orderResponse.paymentStatus }}
+      </div>
+
+      <div *ngIf="error" class="alert">{{ error }}</div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+        <div class="grid two">
+          <div class="field">
+            <label class="label" for="firstName">Prénom</label>
+            <input class="input" id="firstName" type="text" formControlName="firstName" placeholder="Aymane">
+            <div class="error" *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">
+              Obligatoire
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="lastName">Nom</label>
+            <input class="input" id="lastName" type="text" formControlName="lastName" placeholder="Berka">
+            <div class="error" *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+              Obligatoire
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input class="input" id="email" type="email" formControlName="email" placeholder="vous@example.com">
+          <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+            Email invalide
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div class="field">
+            <label class="label" for="quantity">Quantité</label>
+            <input class="input" id="quantity" type="number" min="1" formControlName="quantity">
+            <div class="error" *ngIf="form.get('quantity')?.touched && form.get('quantity')?.invalid">
+              Quantité minimale 1
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="paymentMethod">Paiement</label>
+            <select class="input" id="paymentMethod" formControlName="paymentMethod">
+              <option value="CARD">Carte</option>
+              <option value="PAYPAL">PayPal</option>
+              <option value="CASH">Cash</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel summary-panel">
+          <div class="summary-row">
+            <span>Produit</span>
+            <span class="summary-value">{{ product.name }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Quantité</span>
+            <span class="summary-value">{{ qty }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Total estimé</span>
+            <span class="summary-value">{{ total | number:'1.2-2' }} MAD</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="cta" type="submit" [disabled]="submitting">
+            {{ submitting ? 'En cours...' : 'Confirmer la commande' }}
+          </button>
+          <span class="muted">Le flux passe par order-service puis payment-service.</span>
+        </div>
+      </form>
+
+      <div class="panel" *ngIf="orderResponse">
+        <h3>Récapitulatif</h3>
+        <div class="summary-row">
+          <span>Commande</span>
+          <span class="summary-value">{{ orderResponse.orderId }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Montant</span>
+          <span class="summary-value">{{ orderResponse.totalAmount | number:'1.2-2' }} MAD</span>
+        </div>
+        <div class="summary-row">
+          <span>Statut commande</span>
+          <span class="order-badge">{{ orderResponse.orderStatus }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Statut paiement</span>
+          <span class="order-badge">{{ orderResponse.paymentStatus }}</span>
+        </div>
+        <p class="muted" style="margin-top:12px;">{{ orderResponse.message }}</p>
+      </div>
+    </section>
+  </div>
+</div>

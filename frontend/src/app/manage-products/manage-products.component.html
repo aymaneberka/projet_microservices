@@ -1,0 +1,74 @@
+<div class="container page">
+  <div class="hero-box">
+    <div class="pill">
+      <span class="pill-dot"></span>
+      Gestion catalogue
+    </div>
+    <h1>Ajoutez, mettez à jour ou retirez vos produits en un clic</h1>
+    <p class="muted">
+      Optimisez vos ventes : créez des fiches percutantes, ajustez les stocks en temps réel et publiez vos nouveautés.
+    </p>
+  </div>
+
+  <div *ngIf="error" class="alert">{{ error }}</div>
+  <div *ngIf="info" class="success">{{ info }}</div>
+
+  <div class="grid manage-grid">
+    <section class="panel">
+      <h3>Nouvel article</h3>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+        <div class="field">
+          <label class="label">Nom</label>
+          <input class="input" type="text" formControlName="name" placeholder="PC Portable Ultrabook">
+        </div>
+        <div class="field">
+          <label class="label">Description</label>
+          <textarea class="input textarea" rows="3" formControlName="description" placeholder="Description concise et attractive"></textarea>
+        </div>
+        <div class="grid two">
+          <div class="field">
+            <label class="label">Prix (MAD)</label>
+            <input class="input" type="number" min="0" step="0.01" formControlName="price">
+          </div>
+          <div class="field">
+            <label class="label">Stock</label>
+            <input class="input" type="number" min="0" step="1" formControlName="stock">
+          </div>
+        </div>
+        <div class="actions">
+          <button class="cta" type="submit" [disabled]="submitting">
+            {{ selected ? 'Mettre à jour' : 'Enregistrer' }}
+          </button>
+          <button type="button" class="ghost" *ngIf="selected" (click)="cancelEdit()">Annuler</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h3>Catalogue</h3>
+      <div *ngIf="loading" class="muted">Chargement des produits...</div>
+
+      <div class="list" *ngIf="!loading && products.length">
+        <div class="row header">
+          <span>Nom</span>
+          <span>Prix</span>
+          <span>Stock</span>
+          <span>Actions</span>
+        </div>
+        <div class="row" *ngFor="let product of products">
+          <span class="name">{{ product.name }}</span>
+          <span>{{ product.price | number:'1.2-2' }} MAD</span>
+          <span>{{ product.stock }}</span>
+          <span class="actions-row">
+            <button class="ghost" type="button" (click)="edit(product)">Editer</button>
+            <button class="danger" type="button" (click)="delete(product)" [disabled]="submitting">Supprimer</button>
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="!loading && !products.length" class="muted">
+        Aucun produit pour le moment.
+      </div>
+    </section>
+  </div>
+</div>
