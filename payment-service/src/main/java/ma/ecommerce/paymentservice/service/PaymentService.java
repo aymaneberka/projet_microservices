@@ -12,7 +12,7 @@ public class PaymentService {
     public PaymentResponse processPayment(PaymentRequest request) {
 
         boolean success = true;
-        // tu peux mettre: boolean success = Math.random() > 0.2; (20% échec)
+
 
         String status = success ? "SUCCESS" : "FAILED";
         String transactionId = UUID.randomUUID().toString();

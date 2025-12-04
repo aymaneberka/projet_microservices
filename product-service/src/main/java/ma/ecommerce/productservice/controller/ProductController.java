@@ -12,32 +12,50 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService service;
+    private final ProductService productService;
 
-    public ProductController(ProductService service) {
-        this.service = service;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
+    // READ - liste
     @GetMapping
-    public List<ProductResponse> getAll() {
-        return service.getAll();
+    public List<ProductResponse> getAllProducts() {
+        return productService.getAllProducts();
     }
 
+    // READ - détail
     @GetMapping("/{id}")
-    public ProductResponse getById(@PathVariable Long id) {
-        return service.getById(id);
+    public ProductResponse getProduct(@PathVariable Long id) {
+        return productService.getProductById(id);
     }
 
+    // CREATE
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse create(@RequestBody ProductRequest request) {
-        return service.create(request);
+    public ProductResponse createProduct(@RequestBody ProductRequest request) {
+        return productService.createProduct(request);
     }
 
+    // UPDATE complet (nom, description, prix, stock)
+    @PutMapping("/{id}")
+    public ProductResponse updateProduct(@PathVariable Long id,
+                                         @RequestBody ProductRequest request) {
+        return productService.updateProduct(id, request);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+    }
+
+    // UPDATE partiel : diminution de stock
     @PutMapping("/{id}/decrease-stock")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void decreaseStock(@PathVariable Long id,
-                              @RequestParam int quantity) {
-        service.decreaseStock(id, quantity);
+                              @RequestParam("quantity") int quantity) {
+        productService.decreaseStock(id, quantity);
     }
 }

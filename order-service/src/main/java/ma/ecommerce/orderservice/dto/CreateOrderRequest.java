@@ -5,7 +5,9 @@ public class CreateOrderRequest {
     private Long productId;
     private Integer quantity;
     private String paymentMethod;
-    private String customerEmail;
+
+    // Infos du formulaire client
+    private ClientDto client;
 
     public CreateOrderRequest() {
     }
@@ -34,11 +36,11 @@ public class CreateOrderRequest {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public ClientDto getClient() {
+        return client;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setClient(ClientDto client) {
+        this.client = client;
     }
 }

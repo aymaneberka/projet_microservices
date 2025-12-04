@@ -15,8 +15,11 @@ public class Order {
     private Integer quantity;
     private Double totalAmount;
     private String status;
-    private String customerEmail;   // 👈 email stocké en base
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;    // 👈 lien vers Client
 
     public Order() {
     }
@@ -25,14 +28,16 @@ public class Order {
                  Integer quantity,
                  Double totalAmount,
                  String status,
-                 String customerEmail) {
+                 Client client) {
         this.productId = productId;
         this.quantity = quantity;
         this.totalAmount = totalAmount;
         this.status = status;
-        this.customerEmail = customerEmail;
+        this.client = client;
         this.createdAt = LocalDateTime.now();
     }
+
+    // Getters / Setters
 
     public Long getId() {
         return id;
@@ -70,19 +75,15 @@ public class Order {
         this.status = status;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

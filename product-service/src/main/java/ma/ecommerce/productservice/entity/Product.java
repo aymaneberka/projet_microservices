@@ -29,7 +29,6 @@ public class Product {
         return id;
     }
 
-    // pas de setId, laissé géré par JPA
 
     public String getName() {
         return name;
