@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${product.name} + ' · Boutique'">Produit</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="page">
+    <div class="container">
+        <a href="/" class="muted">&#8592; Retour au catalogue</a>
+
+        <div class="product-layout" th:if="${product}">
+            <section class="panel">
+                <div class="chip" style="margin-bottom:10px;">
+                    Stock <strong th:text="${product.stock}">0</strong>
+                </div>
+                <h1 style="margin:0 0 8px 0;" th:text="${product.name}">Nom du produit</h1>
+                <p class="muted" th:text="${product.description}">Description</p>
+                <div class="price" style="margin-top:6px;"
+                     th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')} + ' MAD'">0.00 MAD
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2>Commander ce produit</h2>
+                <p class="muted" style="margin-top:-4px;">Saisissez vos informations puis choisissez le moyen de paiement.</p>
+
+                <div th:if="${errorMessage}" class="alert" th:text="${errorMessage}"></div>
+
+                <form th:action="@{/orders}" th:object="${orderForm}" method="post">
+                    <input type="hidden" th:field="*{productId}">
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="firstName">Prenom</label>
+                            <input id="firstName" type="text" th:field="*{firstName}" placeholder="Aymane">
+                            <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                        </div>
+                        <div class="field">
+                            <label for="lastName">Nom</label>
+                            <input id="lastName" type="text" th:field="*{lastName}" placeholder="Berka">
+                            <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" th:field="*{email}" placeholder="vous@example.com">
+                        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="quantity">Quantite</label>
+                            <input id="quantity" type="number" min="1" th:field="*{quantity}">
+                            <div class="error" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+                        </div>
+                        <div class="field">
+                            <label for="paymentMethod">Paiement</label>
+                            <select id="paymentMethod" th:field="*{paymentMethod}">
+                                <option value="CARD">Carte</option>
+                                <option value="PAYPAL">PayPal</option>
+                                <option value="CASH">Cash</option>
+                            </select>
+                            <div class="error" th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}"></div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="margin-top:14px;">
+                        <div class="summary"
+                             th:attr="data-price=${product.price}"
+                             th:with="qty=${orderForm.quantity != null ? orderForm.quantity : 1}">
+                            <div class="summary-row">
+                                <span>Produit</span>
+                                <span class="summary-value" th:text="${product.name}">Nom</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Quantite</span>
+                                <span class="summary-value" id="summary-qty" th:text="${qty}">1</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Total estime</span>
+                                <span class="summary-value" id="summary-total"
+                                      th:text="${#numbers.formatDecimal(product.price * qty, 0, 'COMMA', 2, 'POINT')} + ' MAD'">0.00 MAD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:14px; display:flex; gap:12px; align-items:center;">
+                        <button class="cta" type="submit">Confirmer la commande</button>
+                        <span class="muted">Le flux passe par order-service (Feign) puis payment-service.</span>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    const qtyInput = document.getElementById('quantity');
+    const summaryQty = document.getElementById('summary-qty');
+    const summaryTotal = document.getElementById('summary-total');
+    const summaryBox = document.querySelector('.summary');
+    const price = parseFloat(summaryBox?.dataset.price ?? '0');
+
+    function updateSummary() {
+        if (!qtyInput || !summaryQty || !summaryTotal) return;
+        const raw = parseInt(qtyInput.value, 10);
+        const qty = Number.isFinite(raw) && raw > 0 ? raw : 1;
+        summaryQty.textContent = qty;
+        const total = price * qty;
+        summaryTotal.textContent = new Intl.NumberFormat('fr-FR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(total) + ' MAD';
+    }
+
+    qtyInput?.addEventListener('input', updateSummary);
+    updateSummary();
+</script>
+</body>
+</html>

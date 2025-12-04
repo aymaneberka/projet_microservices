@@ -76,6 +76,9 @@ public class OrderService {
 
         if ("SUCCESS".equalsIgnoreCase(paymentResponse.getStatus())) {
 
+            // On retire le stock seulement si le paiement est OK
+            productClient.decreaseStock(request.getProductId(), request.getQuantity());
+
             order.setStatus("PAID");
             orderRepository.save(order);
 

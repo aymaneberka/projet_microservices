@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation commande</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="page">
+    <div class="container">
+        <a href="/" class="muted">&#8592; Retour au catalogue</a>
+
+        <div class="panel" th:if="${orderResponse}">
+            <div class="success">Commande envoyee</div>
+            <h2>Merci pour votre commande</h2>
+            <p class="muted" th:if="${customerEmail}" th:text="'Un recapitulatif sera envoye a ' + ${customerEmail}">Email</p>
+
+            <div class="summary" style="margin-top:12px;">
+                <div class="summary-row">
+                    <span>Numero</span>
+                    <span class="summary-value" th:text="${orderResponse.orderId}">0</span>
+                </div>
+                <div class="summary-row" th:if="${product}">
+                    <span>Produit</span>
+                    <span class="summary-value" th:text="${product.name}">Produit</span>
+                </div>
+                <div class="summary-row">
+                    <span>Montant</span>
+                    <span class="summary-value" th:text="${#numbers.formatDecimal(orderResponse.totalAmount, 0, 'COMMA', 2, 'POINT')} + ' MAD'">0.00 MAD</span>
+                </div>
+                <div class="summary-row">
+                    <span>Statut commande</span>
+                    <span class="order-badge" th:text="${orderResponse.orderStatus}">STATUS</span>
+                </div>
+                <div class="summary-row">
+                    <span>Statut paiement</span>
+                    <span class="order-badge" th:text="${orderResponse.paymentStatus}">STATUS</span>
+                </div>
+            </div>
+
+            <p class="muted" style="margin-top:12px;" th:text="${orderResponse.message}">Message</p>
+            <div style="margin-top:16px; display:flex; gap:10px; align-items:center;">
+                <a class="cta" href="/">Nouvelle commande</a>
+            </div>
+        </div>
+
+        <div class="alert" th:if="${orderResponse == null}">
+            Aucune commande a afficher. Retour au catalogue.
+        </div>
+    </div>
+</div>
+</body>
+</html>

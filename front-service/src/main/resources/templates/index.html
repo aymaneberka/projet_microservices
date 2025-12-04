@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique microservices</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="page">
+    <div class="container">
+        <header class="hero">
+            <div class="pill">
+                <span class="pill-dot"></span>
+                Frontend Thymeleaf - API Gateway
+            </div>
+            <div class="hero-box">
+                <h1 class="hero-heading">Boutique propulsee par vos microservices</h1>
+                <p class="hero-subtitle">
+                    Catalogue produits via product-service, commandes orientees order-service, et paiement automatise.
+                    Cette interface reste legere pour tester rapidement le flux complet.
+                </p>
+            </div>
+        </header>
+
+        <div th:if="${errorMessage}" class="alert" th:text="${errorMessage}"></div>
+
+        <h3 class="section-title">Catalogue</h3>
+
+        <div th:if="${#lists.isEmpty(products)}">
+            <div class="grid-skeleton"></div>
+            <div class="muted" style="margin-top:12px;">Aucun produit disponible pour le moment.</div>
+        </div>
+
+        <div class="product-grid" th:if="${!#lists.isEmpty(products)}">
+            <article class="card" th:each="product : ${products}">
+                <div class="chip">
+                    <span>Stock</span>
+                    <strong th:text="${product.stock}">0</strong>
+                </div>
+                <h3 th:text="${product.name}">Nom du produit</h3>
+                <p class="muted" th:text="${product.description}">Description</p>
+                <div class="price" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')} + ' MAD'">0.00 MAD</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+                    <span class="muted">Decouvrir les details et commander</span>
+                    <a class="cta" th:href="@{'/products/' + ${product.id}}">Ouvrir</a>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <footer class="footer">
+        Interface front legere pour orchestrer les appels via Eureka et le Gateway.
+    </footer>
+</div>
+</body>
+</html>

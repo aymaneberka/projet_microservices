@@ -22,6 +22,7 @@
         <module>payment-service</module>
         <module>notification-service</module>
         <module>order-service</module>
+        <module>front-service</module>
     </modules>
 
 </project>

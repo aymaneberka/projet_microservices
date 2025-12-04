@@ -1,0 +1,11 @@
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\client\OrderClient.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\client\ProductClient.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\dto\ClientDto.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\dto\CreateOrderRequest.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\dto\CreateOrderResponse.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\dto\ProductDto.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\exception\FrontendException.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\FrontServiceApplication.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\service\ShopService.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\web\OrderForm.java
+D:\projet_microservices\front-service\src\main\java\ma\ecommerce\frontservice\web\ShopController.java

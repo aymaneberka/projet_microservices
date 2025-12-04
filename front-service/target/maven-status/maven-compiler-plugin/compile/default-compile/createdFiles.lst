@@ -1,0 +1,11 @@
+ma\ecommerce\frontservice\service\ShopService.class
+ma\ecommerce\frontservice\client\OrderClient.class
+ma\ecommerce\frontservice\client\ProductClient.class
+ma\ecommerce\frontservice\dto\CreateOrderRequest.class
+ma\ecommerce\frontservice\FrontServiceApplication.class
+ma\ecommerce\frontservice\dto\CreateOrderResponse.class
+ma\ecommerce\frontservice\dto\ClientDto.class
+ma\ecommerce\frontservice\web\ShopController.class
+ma\ecommerce\frontservice\dto\ProductDto.class
+ma\ecommerce\frontservice\exception\FrontendException.class
+ma\ecommerce\frontservice\web\OrderForm.class
