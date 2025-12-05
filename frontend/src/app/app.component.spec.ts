@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'Boutique microservices' title`, () => {
+  it(`should have the 'Gestion des commandes' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Boutique microservices');
+    expect(app.title).toEqual('Gestion des commandes');
   });
 
   it('should render the header pill with the title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.pill')?.textContent).toContain('Boutique microservices');
+    expect(compiled.querySelector('.pill')?.textContent).toContain('Gestion des commandes');
   });
 });

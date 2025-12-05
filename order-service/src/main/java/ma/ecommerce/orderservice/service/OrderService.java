@@ -144,7 +144,8 @@ public class OrderService {
                 order.getTotalAmount(),
                 order.getStatus(),
                 "PENDING_MANUAL_REVIEW",
-                "Service de paiement indisponible, commande de " + fullName + " en attente de traitement manuel"
+                "Le service de paiement est indisponible (non demarre). La commande #" + order.getId()
+                        + " pour " + fullName + " est enregistree et reste en attente de validation manuelle. Aucun paiement n'a ete effectue."
         );
     }
 
