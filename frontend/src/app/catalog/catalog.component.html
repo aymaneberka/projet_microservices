@@ -2,39 +2,45 @@
   <header class="hero">
     <div class="pill">
       <span class="pill-dot"></span>
-      Collections exclusives · 24h delivery
+      Frontend Angular - API Gateway
     </div>
     <div class="hero-box">
-      <h1 class="hero-heading">Vos marques préférées, livrées à la vitesse de la lumière</h1>
+      <h1 class="hero-heading">Boutique propulsee par vos microservices</h1>
       <p class="hero-subtitle">
-        Offres limitées, paiement sécurisé, suivi en temps réel. Rejoignez les clients qui passent déjà par notre plateforme.
+        Catalogue produits via product-service, commandes orientees order-service, et paiement automatise.
+        Cette interface reste legere pour tester rapidement le flux complet.
       </p>
     </div>
   </header>
 
   <div *ngIf="error" class="alert">{{ error }}</div>
 
-  <div *ngIf="loading" class="grid">
-    <div class="grid-skeleton" *ngFor="let _ of [1,2,3,4]"></div>
+  <h3 class="section-title">Catalogue</h3>
+
+  <div *ngIf="loading" class="product-grid">
+    <div class="grid-skeleton" *ngFor="let _ of [1, 2, 3, 4]"></div>
   </div>
 
-  <div *ngIf="!loading && !products.length" class="muted empty">
-    Aucun produit disponible pour le moment.
-  </div>
+  <ng-container *ngIf="!loading">
+    <div *ngIf="!products.length">
+      <div class="grid-skeleton"></div>
+      <div class="muted empty">Aucun produit disponible pour le moment.</div>
+    </div>
 
-  <div class="grid" *ngIf="!loading && products.length">
-    <article class="card" *ngFor="let product of products; trackBy: trackById">
-      <div class="chip">
-        <span>Stock</span>
-        <strong>{{ product.stock }}</strong>
-      </div>
-      <h3>{{ product.name }}</h3>
-      <p class="muted">{{ product.description }}</p>
-      <div class="price">{{ product.price | number:'1.2-2' }} MAD</div>
-      <div class="card-footer">
-        <span class="muted">Découvrir les détails et commander</span>
-        <a class="cta" [routerLink]="['/products', product.id]">Ouvrir</a>
-      </div>
-    </article>
-  </div>
+    <div class="product-grid" *ngIf="products.length">
+      <article class="card" *ngFor="let product of products; trackBy: trackById">
+        <div class="chip">
+          <span>Stock</span>
+          <strong>{{ product.stock }}</strong>
+        </div>
+        <h3>{{ product.name }}</h3>
+        <p class="muted">{{ product.description }}</p>
+        <div class="price">{{ product.price | number: '1.2-2' }} MAD</div>
+        <div class="card-footer">
+          <span class="muted">Decouvrir les details et commander</span>
+          <a class="cta" [routerLink]="['/products', product.id]">Ouvrir</a>
+        </div>
+      </article>
+    </div>
+  </ng-container>
 </div>

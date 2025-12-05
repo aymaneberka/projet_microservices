@@ -23,7 +23,8 @@ export class ProductDetailComponent implements OnInit {
 
   product?: Product;
   loading = true;
-  error?: string;
+  loadError?: string;
+  orderError?: string;
   orderResponse?: CreateOrderResponse;
   submitting = false;
 
@@ -44,7 +45,7 @@ export class ProductDetailComponent implements OnInit {
           const id = Number(params.get('id'));
           return this.productService.getProduct(id).pipe(
             catchError(() => {
-              this.error = 'Produit introuvable ou service indisponible.';
+              this.loadError = 'Produit introuvable ou service indisponible.';
               this.loading = false;
               return of(undefined);
             })
@@ -70,12 +71,12 @@ export class ProductDetailComponent implements OnInit {
 
   submit(): void {
     if (!this.product) {
-      this.error = 'Produit introuvable';
+      this.orderError = 'Produit introuvable';
       return;
     }
 
     this.orderResponse = undefined;
-    this.error = undefined;
+    this.orderError = undefined;
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -98,7 +99,7 @@ export class ProductDetailComponent implements OnInit {
     this.orderService.createOrder(payload).subscribe({
       next: (res: CreateOrderResponse) => {
         this.orderResponse = res;
-        // Ajuster le stock affiché côté client
+        // Ajuster le stock affiche cote client
         this.product = {
           ...this.product!,
           stock: Math.max(0, (this.product?.stock ?? 0) - this.qty)
@@ -106,7 +107,7 @@ export class ProductDetailComponent implements OnInit {
         this.submitting = false;
       },
       error: () => {
-        this.error = 'Commande impossible pour le moment. Vérifiez les informations ou réessayez.';
+        this.orderError = 'Commande impossible pour le moment. Verifiez les informations ou reessayez.';
         this.submitting = false;
       }
     });

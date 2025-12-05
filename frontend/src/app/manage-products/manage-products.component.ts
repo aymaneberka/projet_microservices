@@ -70,8 +70,8 @@ export class ManageProductsComponent implements OnInit {
     obs.subscribe({
       next: (product: Product) => {
         this.info = this.selected
-          ? `Produit "${product.name}" mis à jour.`
-          : `Produit "${product.name}" créé.`;
+          ? `Produit "${product.name}" mis a jour.`
+          : `Produit "${product.name}" cree.`;
         this.form.reset({ price: 0, stock: 0 });
         this.selected = undefined;
         this.fetchProducts();
@@ -101,7 +101,7 @@ export class ManageProductsComponent implements OnInit {
     this.submitting = true;
     this.productService.deleteProduct(product.id).subscribe({
       next: () => {
-        this.info = `Produit "${product.name}" supprimé.`;
+        this.info = `Produit "${product.name}" supprime.`;
         this.selected = undefined;
         this.fetchProducts();
         this.submitting = false;

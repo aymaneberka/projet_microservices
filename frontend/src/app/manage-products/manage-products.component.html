@@ -4,9 +4,9 @@
       <span class="pill-dot"></span>
       Gestion catalogue
     </div>
-    <h1>Ajoutez, mettez à jour ou retirez vos produits en un clic</h1>
+    <h1>Ajoutez, mettez a jour ou retirez vos produits en un clic</h1>
     <p class="muted">
-      Optimisez vos ventes : créez des fiches percutantes, ajustez les stocks en temps réel et publiez vos nouveautés.
+      Optimisez vos ventes : creez des fiches percutantes, ajustez les stocks en temps reel et publiez vos nouveautes.
     </p>
   </div>
 
@@ -37,7 +37,7 @@
         </div>
         <div class="actions">
           <button class="cta" type="submit" [disabled]="submitting">
-            {{ selected ? 'Mettre à jour' : 'Enregistrer' }}
+            {{ selected ? 'Mettre a jour' : 'Enregistrer' }}
           </button>
           <button type="button" class="ghost" *ngIf="selected" (click)="cancelEdit()">Annuler</button>
         </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="row" *ngFor="let product of products">
           <span class="name">{{ product.name }}</span>
-          <span>{{ product.price | number:'1.2-2' }} MAD</span>
+          <span>{{ product.price | number: '1.2-2' }} MAD</span>
           <span>{{ product.stock }}</span>
           <span class="actions-row">
             <button class="ghost" type="button" (click)="edit(product)">Editer</button>

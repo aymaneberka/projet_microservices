@@ -5,81 +5,32 @@
 
 .app-shell {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  background: var(--bg-gradient);
-}
-
-.sidebar {
-  border-right: 1px solid var(--border);
-  padding: 20px 18px;
-  background: rgba(10, 15, 30, 0.7);
-  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
-.content-area {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.topbar {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 22px;
+.header {
   border-bottom: 1px solid var(--border);
   background: rgba(11, 17, 32, 0.75);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
 }
 
-.topbar-title {
-  font-weight: 700;
-  letter-spacing: -0.01em;
+.header .container {
+  padding: 0;
 }
 
-.topbar-accent {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 0 6px rgba(124, 240, 197, 0.25);
-}
-
-.titles {
+.header-content {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.title {
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.subtitle {
-  font-size: 13px;
-  color: var(--muted);
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
 }
 
 .nav-links {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .nav-links a {
@@ -97,31 +48,6 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.promo-card {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 12px;
-  background: linear-gradient(160deg, rgba(124, 240, 197, 0.12), rgba(93, 225, 255, 0.08));
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.4;
-}
-
 .main {
   flex: 1;
-  padding: 28px 0 48px 0;
-}
-
-@media (max-width: 900px) {
-  .app-shell {
-    grid-template-columns: 1fr;
-  }
-  .sidebar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .nav-links {
-    flex-direction: row;
-  }
 }
